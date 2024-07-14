@@ -1,19 +1,18 @@
 ﻿using CustomSaberColors.Installers;
-using HarmonyLib;
 using IPA;
 using IPA.Config;
 using IPA.Config.Stores;
 using IPA.Logging;
 using SiraUtil.Zenject;
-using System.Reflection;
 
 namespace CustomSaberColors;
 
 [Plugin(RuntimeOptions.SingleStartInit), NoEnableDisable]
-public class Plugin
+internal class Plugin
 {
-    private Harmony harmony = new("CustomSaberColors");
-
+    // Reader's note:
+    // As someone who has spelled it as "colour" their entire life,
+    // writing this plugin has been a mental nightmare.
     [Init]
     public Plugin(Logger logger, Config config, Zenjector zenjector)
     {
