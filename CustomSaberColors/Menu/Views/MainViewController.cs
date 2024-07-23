@@ -2,8 +2,6 @@
 using BeatSaberMarkupLanguage.ViewControllers;
 using CustomSaberColors.Menu.CustomTags;
 using CustomSaberColors.Project;
-using HMUI;
-using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -16,7 +14,7 @@ internal class MainViewController : BSMLAutomaticViewController
     [Inject] private readonly PluginConfig config;
 
     [UIComponent("color-editor")]
-    private SaberColorEditorController colorEditor;
+    private readonly SaberColorEditorController colorEditor;
 
     [UIValue("mod-enabled")]
     public bool Enabled
@@ -29,25 +27,30 @@ internal class MainViewController : BSMLAutomaticViewController
     private void PostPare()
     {
         colorEditor.ToggleGroup.SetColors(config.CurrentLeftColor, config.CurrentRightColor);
-        colorEditor.Color = colorEditor.ToggleGroup.Color;
+        colorEditor.RgbPanel.color = colorEditor.ToggleGroup.Color;
+        colorEditor.HsvPanel.color = colorEditor.ToggleGroup.Color;
+        colorEditor.PreviousColorPanel.AddColor(colorEditor.ToggleGroup.Color);
         colorEditor.ToggleGroup.SelectedColorChanged += OnToggleGroupColorChanged;
-        colorEditor.RgbController.colorDidChangeEvent += OnRGBPanelColorChanged;
-        colorEditor.HsvController.colorDidChangeEvent += OnHSVPanelColorChanged;
+        colorEditor.RgbPanel.colorDidChangeEvent += OnRGBPanelColorChanged;
+        colorEditor.HsvPanel.colorDidChangeEvent += OnHSVPanelColorChanged;
+        colorEditor.PreviousColorPanel.colorWasSelectedEvent += OnPreviousColorSelected;
     }
 
     private void OnToggleGroupColorChanged(Color color)
     {
-        colorEditor.RgbController.color = color;
-        colorEditor.HsvController.color = color;
+        colorEditor.RgbPanel.color = color;
+        colorEditor.HsvPanel.color = color;
+        colorEditor.PreviousColorPanel.AddColor(color);
     }
 
     private void OnRGBPanelColorChanged(Color color, ColorChangeUIEventType eventType)
     {
         colorEditor.ToggleGroup.Color = color;
-        colorEditor.HsvController.color = color;
+        colorEditor.HsvPanel.color = color;
 
         if (eventType == ColorChangeUIEventType.PointerUp)
         {
+            colorEditor.PreviousColorPanel.AddColor(color);
             (config.CurrentLeftColor, config.CurrentRightColor) = colorEditor.ToggleGroup.EditedColors;
         }
     }
@@ -55,12 +58,21 @@ internal class MainViewController : BSMLAutomaticViewController
     private void OnHSVPanelColorChanged(Color color, ColorChangeUIEventType eventType)
     {
         colorEditor.ToggleGroup.Color = color;
-        colorEditor.RgbController.color = color;
+        colorEditor.RgbPanel.color = color;
 
         if (eventType == ColorChangeUIEventType.PointerUp)
         {
+            colorEditor.PreviousColorPanel.AddColor(color);
             (config.CurrentLeftColor, config.CurrentRightColor) = colorEditor.ToggleGroup.EditedColors;
         }
+    }
+
+    private void OnPreviousColorSelected(Color color)
+    {
+        colorEditor.ToggleGroup.Color = color;
+        colorEditor.RgbPanel.color = color;
+        colorEditor.HsvPanel.color = color;
+        (config.CurrentLeftColor, config.CurrentRightColor) = colorEditor.ToggleGroup.EditedColors;
     }
 
     protected override void OnDestroy()
@@ -68,8 +80,9 @@ internal class MainViewController : BSMLAutomaticViewController
         if (colorEditor)
         {
             colorEditor.ToggleGroup.SelectedColorChanged -= OnToggleGroupColorChanged;
-            colorEditor.RgbController.colorDidChangeEvent -= OnHSVPanelColorChanged;
-            colorEditor.HsvController.colorDidChangeEvent -= OnHSVPanelColorChanged;
+            colorEditor.RgbPanel.colorDidChangeEvent -= OnRGBPanelColorChanged;
+            colorEditor.HsvPanel.colorDidChangeEvent -= OnHSVPanelColorChanged;
+            colorEditor.PreviousColorPanel.colorWasSelectedEvent -= OnPreviousColorSelected;
         }
 
         base.OnDestroy();

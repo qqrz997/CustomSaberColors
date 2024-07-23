@@ -4,6 +4,7 @@ using CustomSaberColors.Menu.CustomTags;
 using CustomSaberColors.Project;
 using IPA;
 using IPA.Config.Stores;
+using IPA.Loader;
 using IPA.Logging;
 using SiraUtil.Zenject;
 
@@ -18,7 +19,7 @@ internal class Plugin
     // As someone who has spelled it as "colour" their entire life,
     // writing this plugin has been a mental nightmare.
     [Init]
-    public Plugin(Logger logger, Config config, Zenjector zenjector)
+    public Plugin(Logger logger, Config config, Zenjector zenjector, PluginMetadata metadata)
     {
         var pluginConfig = config.Generated<PluginConfig>();
         zenjector.UseLogger(logger);
@@ -27,5 +28,7 @@ internal class Plugin
         zenjector.Install<PlayerInstaller>(Location.Player);
 
         BSMLParser.instance.RegisterTag(new SaberColorEditorTag());
+
+        logger.Debug($"CustomSaberColors Version {metadata.HVersion} has initialized");
     }
 }

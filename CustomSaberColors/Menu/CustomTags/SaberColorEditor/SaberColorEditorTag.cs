@@ -19,37 +19,35 @@ internal class SaberColorEditorTag : BSMLTag
     public override GameObject CreateObject(Transform parent)
     {
         var gameObject = new GameObject("SaberColorEditorController") { layer = 5 };
-        var controller = gameObject.AddComponent<SaberColorEditorController>();
         var transform = gameObject.AddComponent<RectTransform>();
         transform.SetParent(parent, false);
-
         transform.sizeDelta = new(135f, 70f);
         transform.anchorMin = new(0.5f, 0.5f);
         transform.anchorMax = transform.anchorMin;
 
         var gameplaySetup = DiContainer.Resolve<GameplaySetupViewController>();
-
         var editColorSchemeController = gameplaySetup.GetComponentInChildren<EditColorSchemeController>(true);
         var rgbTemplate = editColorSchemeController.GetComponentInChildren<RGBPanelController>();
         var hsvTemplate = editColorSchemeController.GetComponentInChildren<HSVPanelController>();
         var toggleTemplate = editColorSchemeController.GetComponentInChildren<ColorSchemeColorToggleController>();
+        var previousColorTemplate = editColorSchemeController.GetComponentInChildren<PreviousColorPanelController>();
 
-        var rgbController = Object.Instantiate(rgbTemplate, gameObject.transform, false);
-        rgbController.name = "RGBPanel";
-        var rgbTransform = rgbController.transform as RectTransform;
+        var rgbPanel = Object.Instantiate(rgbTemplate, gameObject.transform, false);
+        rgbPanel.name = "RGBPanel";
+        var rgbTransform = rgbPanel.transform as RectTransform;
         rgbTransform.anchoredPosition = new(0f, 1f);
         rgbTransform.anchorMin = new(0f, 0.25f);
         rgbTransform.anchorMax = rgbTransform.anchorMin;
         rgbTransform.offsetMin = new(15f, 0f);
         rgbTransform.offsetMax = new(61f, 52f);
 
-        var b = rgbController.transform.Find("Content/BGradientSlider") as RectTransform;
-        ((RectTransform)rgbController.transform.Find("Content/RGradientSlider")).sizeDelta = b.sizeDelta;
-        ((RectTransform)rgbController.transform.Find("Content/GGradientSlider")).sizeDelta = b.sizeDelta;
+        var b = rgbPanel.transform.Find("Content/BGradientSlider") as RectTransform;
+        ((RectTransform)rgbPanel.transform.Find("Content/RGradientSlider")).sizeDelta = b.sizeDelta;
+        ((RectTransform)rgbPanel.transform.Find("Content/GGradientSlider")).sizeDelta = b.sizeDelta;
 
-        var hsvController = Object.Instantiate(hsvTemplate, gameObject.transform, false);
-        hsvController.name = "HSVPanel";
-        var hsvTransform = hsvController.transform as RectTransform;
+        var hsvPanel = Object.Instantiate(hsvTemplate, gameObject.transform, false);
+        hsvPanel.name = "HSVPanel";
+        var hsvTransform = hsvPanel.transform as RectTransform;
         hsvTransform.anchoredPosition = new(0, 3);
         hsvTransform.anchorMin = new(0.5f, 0.15f);
         hsvTransform.anchorMax = hsvTransform.anchorMin;
@@ -84,10 +82,15 @@ internal class SaberColorEditorTag : BSMLTag
         saberAIcon.transform.rotation = Quaternion.Euler(0, 180, 0);
         saberBColorToggleController.transform.Find("Icon").GetComponent<ImageView>().sprite = handSprite;
 
+        var previousColorPanel = DiContainer.InstantiatePrefab(previousColorTemplate).GetComponent<PreviousColorPanelController>();
+        var previousColorTransform = previousColorPanel.transform as RectTransform;
+        previousColorTransform.SetParent(gameObject.transform, false);
+        previousColorTransform.offsetMin = new(-68.5f, 57f);
+        previousColorTransform.offsetMax = new(-59f, 66.5f);
+
+        var controller = gameObject.AddComponent<SaberColorEditorController>();
         saberColorsToggleGroup.Init(saberAColorToggleController, saberBColorToggleController);
-        controller.Init(rgbController, hsvController, saberColorsToggleGroup);
-        rgbController.colorDidChangeEvent += controller.OnChange;
-        hsvController.colorDidChangeEvent += controller.OnChange;
+        controller.Init(rgbPanel, hsvPanel, saberColorsToggleGroup, previousColorPanel);
 
         gameObject.SetActive(true);
 
