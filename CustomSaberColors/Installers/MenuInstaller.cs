@@ -1,5 +1,5 @@
-﻿using CustomSaberColors.UI;
-using CustomSaberColors.UI.Views;
+﻿using CustomSaberColors.Menu;
+using CustomSaberColors.Menu.Views;
 using Zenject;
 
 namespace CustomSaberColors.Installers;

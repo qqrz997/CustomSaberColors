@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
-namespace CustomSaberColors;
+namespace CustomSaberColors.Project;
 
 internal class PluginConfig
 {

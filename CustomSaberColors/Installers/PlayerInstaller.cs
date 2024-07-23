@@ -1,4 +1,5 @@
 ﻿using CustomSaberColors.Game;
+using CustomSaberColors.Project;
 using Zenject;
 
 namespace CustomSaberColors.Installers;

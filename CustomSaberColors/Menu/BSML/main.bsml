@@ -12,12 +12,15 @@
                         apply-on-change='true' />
     </vertical>
     
-    <vertical child-control-height='false' child-expand-height='false' background='round-rect-panel' bg-color='#00000077' pad='1' pad-left='2' pad-right='2' bg='round-rect-panel'>
-      <color-setting value='left-color' text='Left Color'
-                        apply-on-change='true' />
+    <!--WIP-->
+    <vertical child-control-height='false' child-expand-height='false' ignore-layout='true' anchored-position-y='-5'>
+      <horizontal horizontal-fit='PreferredSize' preferred-height='80' preferred-width='150'>
+        <color-editor id='color-editor'/>
+      </horizontal>
 
-      <color-setting value='right-color' text='Right Color'
-                        apply-on-change='true' />
+      <horizontal ignore-layout='true' anchored-position-x='-37' anchored-position-y='-47' horizontal-fit='PreferredSize'>
+        <text text='Color Schemes Coming Soon!' font-align='Center' font-color='grey' font-size='3' />
+      </horizontal>
     </vertical>
   </vertical>
 </vertical>
