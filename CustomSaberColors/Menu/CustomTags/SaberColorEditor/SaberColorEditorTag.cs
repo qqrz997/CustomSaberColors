@@ -75,7 +75,7 @@ internal class SaberColorEditorTag : BSMLTag
         saberBColorToggleController.name = "SaberB";
         saberAColorToggleController.toggle.group = toggleGroup;
         saberBColorToggleController.toggle.group = toggleGroup;
-        var handSprite = GameObject.FindObjectsOfType<ImageView>(true).First(image => image.sprite.name == "LeftHandedIcon").sprite;
+        var handSprite = GameObject.FindObjectsOfType<ImageView>(true).First(image => image.sprite != null && image.sprite.name == "LeftHandedIcon").sprite;
         var saberAIcon = saberAColorToggleController.transform.Find("Icon").GetComponent<ImageView>();
         saberAIcon.sprite = handSprite;
         saberAIcon._skew *= -1.0f;
