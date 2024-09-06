@@ -1,5 +1,8 @@
 ## Changelog
 
+### 0.2.2
+- Updated to Beat Saber 1.37.5
+
 ### 0.2.1
 - Fixed a conflict that caused an error when the menu was opened
 
