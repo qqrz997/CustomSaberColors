@@ -27,7 +27,7 @@ internal class Plugin
         zenjector.Install<MenuInstaller>(Location.Menu);
         zenjector.Install<PlayerInstaller>(Location.Player);
 
-        BSMLParser.instance.RegisterTag(new SaberColorEditorTag());
+        BSMLParser.Instance.RegisterTag(new SaberColorEditorTag());
 
         logger.Debug($"CustomSaberColors Version {metadata.HVersion} has initialized");
     }

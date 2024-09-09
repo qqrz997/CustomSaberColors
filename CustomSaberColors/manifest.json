@@ -3,12 +3,12 @@
   "id": "CustomSaberColors",
   "name": "CustomSaberColors",
   "author": "qqrz997",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Configure your saber colors separately from the color of the notes",
-  "gameVersion": "1.37.4",
+  "gameVersion": "1.37.5",
   "dependsOn": {
     "BSIPA": "^4.3.5",
     "SiraUtil": "^3.1.11",
-    "BeatSaberMarkupLanguage": "^1.11.4"
+    "BeatSaberMarkupLanguage": "^1.12.0"
   }
 }
