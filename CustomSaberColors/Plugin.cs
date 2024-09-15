@@ -1,6 +1,4 @@
-﻿using BeatSaberMarkupLanguage;
-using CustomSaberColors.Installers;
-using CustomSaberColors.Menu.CustomTags;
+﻿using CustomSaberColors.Installers;
 using CustomSaberColors.Project;
 using IPA;
 using IPA.Config.Stores;
@@ -26,8 +24,6 @@ internal class Plugin
         zenjector.Install<AppInstaller>(Location.App, pluginConfig);
         zenjector.Install<MenuInstaller>(Location.Menu);
         zenjector.Install<PlayerInstaller>(Location.Player);
-
-        BSMLParser.Instance.RegisterTag(new SaberColorEditorTag());
 
         logger.Debug($"CustomSaberColors Version {metadata.HVersion} has initialized");
     }

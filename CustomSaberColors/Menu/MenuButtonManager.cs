@@ -1,5 +1,4 @@
 ﻿using BeatSaberMarkupLanguage.MenuButtons;
-using SiraUtil.Logging;
 using System;
 using Zenject;
 
