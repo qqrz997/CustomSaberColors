@@ -3,7 +3,7 @@
   "id": "CustomSaberColors",
   "name": "CustomSaberColors",
   "author": "qqrz997",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Configure your saber colors separately from the color of the notes",
   "gameVersion": "1.37.5",
   "dependsOn": {

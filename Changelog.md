@@ -1,5 +1,8 @@
 ## Changelog
 
+### 0.2.4
+- Fixed a mistake in registering a custom BSML tag
+
 ### 0.2.2
 - Updated to Beat Saber 1.37.5
 
