@@ -10,7 +10,7 @@ namespace CustomSaberColors.Menu.CustomTags.RGBPanel;
 /// Separating the color editor components will make customizability better.
 /// This tag is currently not in use.
 /// </summary>
-internal class RGBPanelTag : BSMLTag
+/*internal class RGBPanelTag : BSMLTag
 {
     public override string[] Aliases => ["rgb-panel"];
 
@@ -51,4 +51,4 @@ internal class RGBPanelTag : BSMLTag
         gameObject.AddComponent<ContentSizeFitter>();
         return gameObject;
     }
-}
+}*/

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CustomSaberColors.Menu.CustomTags.RGBPanel;
 
-internal class RGBTagController : MonoBehaviour
+/*internal class RGBTagController : MonoBehaviour
 {
     private RGBPanelController rgbController;
     private Color color;
@@ -63,4 +63,4 @@ internal class RGBTagController : MonoBehaviour
         }
 
     }
-}
+}*/

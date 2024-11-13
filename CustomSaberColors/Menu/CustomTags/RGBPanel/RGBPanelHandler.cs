@@ -1,4 +1,4 @@
-﻿using BeatSaberMarkupLanguage;
+﻿/*using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.Parser;
 using BeatSaberMarkupLanguage.TypeHandlers;
 using System;
@@ -19,4 +19,4 @@ internal class RGBPanelHandler : TypeHandler<RGBTagController>
         { "value", ["value"] },
         { "disable-skew", ["disable-skew"] }
     };
-}
+}*/
