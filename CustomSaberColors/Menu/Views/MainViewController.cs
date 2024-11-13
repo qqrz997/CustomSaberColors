@@ -11,10 +11,10 @@ namespace CustomSaberColors.Menu.Views;
 [ViewDefinition("CustomSaberColors.Menu.BSML.main.bsml")]
 internal class MainViewController : BSMLAutomaticViewController
 {
-    [Inject] private readonly PluginConfig config;
+    [Inject] private readonly PluginConfig config = null!;
 
     [UIComponent("color-editor")]
-    private readonly SaberColorEditorController colorEditor;
+    private readonly SaberColorEditorController colorEditor = null!;
 
     [UIValue("mod-enabled")]
     public bool Enabled

@@ -4,6 +4,7 @@ using HMUI;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Object;
 
 namespace CustomSaberColors.Menu.CustomTags;
 
@@ -32,22 +33,22 @@ internal class SaberColorEditorTag : BSMLTag
         var toggleTemplate = editColorSchemeController.GetComponentInChildren<ColorSchemeColorToggleController>();
         var previousColorTemplate = editColorSchemeController.GetComponentInChildren<PreviousColorPanelController>();
 
-        var rgbPanel = Object.Instantiate(rgbTemplate, gameObject.transform, false);
+        var rgbPanel = Instantiate(rgbTemplate, gameObject.transform, false);
         rgbPanel.name = "RGBPanel";
-        var rgbTransform = rgbPanel.transform as RectTransform;
+        var rgbTransform = (RectTransform)rgbPanel.transform;
         rgbTransform.anchoredPosition = new(0f, 1f);
         rgbTransform.anchorMin = new(0f, 0.25f);
         rgbTransform.anchorMax = rgbTransform.anchorMin;
         rgbTransform.offsetMin = new(15f, 0f);
         rgbTransform.offsetMax = new(61f, 52f);
 
-        var b = rgbPanel.transform.Find("Content/BGradientSlider") as RectTransform;
+        var b = (RectTransform)rgbPanel.transform.Find("Content/BGradientSlider");
         ((RectTransform)rgbPanel.transform.Find("Content/RGradientSlider")).sizeDelta = b.sizeDelta;
         ((RectTransform)rgbPanel.transform.Find("Content/GGradientSlider")).sizeDelta = b.sizeDelta;
 
-        var hsvPanel = Object.Instantiate(hsvTemplate, gameObject.transform, false);
+        var hsvPanel = Instantiate(hsvTemplate, gameObject.transform, false);
         hsvPanel.name = "HSVPanel";
-        var hsvTransform = hsvPanel.transform as RectTransform;
+        var hsvTransform = (RectTransform)hsvPanel.transform;
         hsvTransform.anchoredPosition = new(0, 3);
         hsvTransform.anchorMin = new(0.5f, 0.15f);
         hsvTransform.anchorMax = hsvTransform.anchorMin;
@@ -69,13 +70,13 @@ internal class SaberColorEditorTag : BSMLTag
         toggleGroupHorizontal.childForceExpandHeight = false;
         toggleGroupHorizontal.spacing = -1.68f;
 
-        var saberAColorToggleController = Object.Instantiate(toggleTemplate, toggleGroupObject.transform, false);
-        var saberBColorToggleController = Object.Instantiate(toggleTemplate, toggleGroupObject.transform, false);
+        var saberAColorToggleController = Instantiate(toggleTemplate, toggleGroupObject.transform, false);
+        var saberBColorToggleController = Instantiate(toggleTemplate, toggleGroupObject.transform, false);
         saberAColorToggleController.name = "SaberA";
         saberBColorToggleController.name = "SaberB";
         saberAColorToggleController.toggle.group = toggleGroup;
         saberBColorToggleController.toggle.group = toggleGroup;
-        var handSprite = GameObject.FindObjectsOfType<ImageView>(true).First(image => image.sprite != null && image.sprite.name == "LeftHandedIcon").sprite;
+        var handSprite = FindObjectsOfType<ImageView>(true).First(image => image.sprite != null && image.sprite.name == "LeftHandedIcon").sprite;
         var saberAIcon = saberAColorToggleController.transform.Find("Icon").GetComponent<ImageView>();
         saberAIcon.sprite = handSprite;
         saberAIcon._skew *= -1.0f;
@@ -83,7 +84,7 @@ internal class SaberColorEditorTag : BSMLTag
         saberBColorToggleController.transform.Find("Icon").GetComponent<ImageView>().sprite = handSprite;
 
         var previousColorPanel = DiContainer.InstantiatePrefab(previousColorTemplate).GetComponent<PreviousColorPanelController>();
-        var previousColorTransform = previousColorPanel.transform as RectTransform;
+        var previousColorTransform = (RectTransform)previousColorPanel.transform;
         previousColorTransform.SetParent(gameObject.transform, false);
         previousColorTransform.offsetMin = new(-68.5f, 57f);
         previousColorTransform.offsetMax = new(-59f, 66.5f);

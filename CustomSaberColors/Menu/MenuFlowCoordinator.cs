@@ -6,8 +6,8 @@ namespace CustomSaberColors.Menu;
 
 internal class MenuFlowCoordinator : FlowCoordinator
 {
-    [Inject] private readonly MainViewController mainView;
-    [Inject] private readonly MainFlowCoordinator mainFlowCoordinator;
+    [Inject] private readonly MainViewController mainView = null!;
+    [Inject] private readonly MainFlowCoordinator mainFlowCoordinator = null!;
 
     private void Start()
     {
