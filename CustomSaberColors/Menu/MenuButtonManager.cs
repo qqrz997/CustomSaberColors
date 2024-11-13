@@ -15,17 +15,17 @@ internal class MenuButtonManager : IInitializable, IDisposable
         this.menuFlowCoordinator = menuFlowCoordinator;
     }
 
-    private MenuButton button;
+    private MenuButton menuButton;
 
     public void Initialize()
     {
-        button = new("Saber Colors", "todo hover hint", PresentFlowCoordinator);
-        MenuButtons.Instance.RegisterButton(button);
+        menuButton = new("Saber Colors", PresentFlowCoordinator);
+        MenuButtons.Instance.RegisterButton(menuButton);
     }
 
     public void Dispose()
     {
-        MenuButtons.Instance.UnregisterButton(button);
+        MenuButtons.Instance.UnregisterButton(menuButton);
     }
 
     private void PresentFlowCoordinator()

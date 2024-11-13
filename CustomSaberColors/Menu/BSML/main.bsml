@@ -17,10 +17,6 @@
       <horizontal horizontal-fit='PreferredSize' preferred-height='80' preferred-width='150'>
         <color-editor id='color-editor'/>
       </horizontal>
-
-      <horizontal ignore-layout='true' anchored-position-x='-37' anchored-position-y='-47' horizontal-fit='PreferredSize'>
-        <text text='Color Schemes Coming Soon!' font-align='Center' font-color='grey' font-size='3' />
-      </horizontal>
     </vertical>
   </vertical>
 </vertical>
