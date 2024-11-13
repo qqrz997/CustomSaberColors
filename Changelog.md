@@ -1,5 +1,11 @@
 ## Changelog
 
+### 0.2.6
+- Removed the temporary hover hint on the main menu button
+- Removed the temporary text in the main menu
+
+### 0.2.5
+
 ### 0.2.4
 - Fixed a mistake in registering a custom BSML tag
 
