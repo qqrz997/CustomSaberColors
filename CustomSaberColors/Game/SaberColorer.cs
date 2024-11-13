@@ -27,18 +27,14 @@ internal class SaberColorer : IInitializable
     private IEnumerator WaitForSaberModelController()
     {
         yield return new WaitUntil(() => Resources.FindObjectsOfTypeAll<SaberModelController>().Any());
-        UnityMainThreadTaskScheduler.Factory.StartNew(ApplyColors);
-    }
-
-    private async Task ApplyColors()
-    {
-        var attempts = 3;
-        var interval = 600;
+        
+        const float secondsInterval = 0.6f;
+        int attempts = 3;
 
         while (attempts-- > 0)
         {
             colorProcessor.SetSaberColors(config.CurrentLeftColor, config.CurrentRightColor);
-            await Task.Delay(interval);
+            yield return new WaitForSeconds(secondsInterval);
         }
     }
 }
