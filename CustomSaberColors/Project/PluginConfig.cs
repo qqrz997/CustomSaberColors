@@ -7,7 +7,7 @@ namespace CustomSaberColors.Project;
 
 internal class PluginConfig
 {
-    public virtual bool Enabled { get; set; } = true;
+    public virtual bool Enabled { get; set; } = false;
 
     public virtual Color CurrentLeftColor { get; set; } = new(0.784f, 0.078f, 0.078f);
 
